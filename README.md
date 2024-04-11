@@ -5,6 +5,10 @@
 pm2 init simple
 # 使用配置文件启动
 pm2 start ecosystem.config.js
+# 列出进程
+pm2 list
+# 关闭进程
+pm2 kill
 ```
 
 # redis
