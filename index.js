@@ -18,11 +18,11 @@ app.use(
   })
 );
 app.use(bodyParser());
-app.use(
-  log4js.connectLogger(log4js.getLogger("access"), {
-    level: log4js.levels.INFO,
-  })
-);
+// app.use(
+//   log4js.connectLogger(log4js.getLogger("access"), {
+//     level: log4js.levels.INFO,
+//   })
+// );
 // const userRouter = require("./routers/user");
 // const goodsRouter = require("./routers/goods");
 // const Router = require("koa-router");
