@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="usernameInput" value="hahahah" />
+    <botton onclick="login()">登录</botton>
+    <div id="content"></div>
+    <script>
+      const baseUrl = ""; // "http://localhost:4000";
+      function welcome() {
+        fetch(baseUrl + "/user/info", {
+          method: "GET",
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            document.getElementById("content").innerText = JSON.stringify(res);
+          });
+      }
+      function login() {
+        fetch(baseUrl + "/user/login", {
+          method: "POST",
+          body: JSON.stringify({
+            username: document.getElementById("usernameInput").value,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            if (res.code == 1) {
+              localStorage.setItem("token", res.token);
+              welcome();
+            } else alert("登录失败");
+          });
+      }
+    </script>
+  </body>
+</html>
