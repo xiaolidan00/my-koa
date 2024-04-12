@@ -29,3 +29,24 @@ get hello
 ```
 requirepass 123456
 ```
+
+# nginx
+```bash
+# 启动
+start nginx
+# 关闭
+nginx -s stop
+
+tasklist |findstr nginx.exe
+
+taskkill /f /t /pid 17444
+```
+配置代理地址
+```yaml
+location /api/{
+			proxy_pass http://localhost:4000/;
+            #代理ip地址
+			proxy_set_header X-Real-IP $remote_addr;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		}
+```

@@ -8,7 +8,9 @@ const { logger, log4js } = require("./utils/loger");
 const path = require("path");
 const registerRouter = require("./registerRouter");
 app.use(async (ctx, next) => {
-  logger.info(ctx.req.url);
+  const ip = ctx.request.headers["x-forwarded-for"] || ctx.request.ip;
+  logger.info(`from ${ip} visit ${ctx.req.url}`);
+
   await next();
 });
 app.use(
