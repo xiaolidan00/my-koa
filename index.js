@@ -7,18 +7,22 @@ const bodyParser = require("koa-bodyparser");
 const { logger, log4js } = require("./utils/loger");
 const path = require("path");
 const registerRouter = require("./registerRouter");
-app.use(async (ctx, next) => {
-  const ip = ctx.request.headers["x-forwarded-for"] || ctx.request.ip;
-  logger.info(`from ${ip} visit ${ctx.req.url}`);
-  ctx.respond.headers["X-Frame-Options"] = "SAMEORIGIN";
-  await next();
-});
+
 app.use(
   static({
     dir: "static", //静态资源目录对于相对入口文件index.js的路径
     router: "/static/", //路由命名  路由长度 =2
   })
 );
+app.use(async (ctx, next) => {
+  const ip = ctx.request.headers["x-forwarded-for"] || ctx.request.ip;
+  logger.info(`from ${ip} visit ${ctx.req.url}`);
+
+  ctx.header["X-Frame-Options"] = "SAMEORIGIN";
+  ctx.header["Content-Security-Policy"] = `frame-ancestors 'self'`;
+
+  await next();
+});
 app.use(bodyParser());
 // app.use(
 //   log4js.connectLogger(log4js.getLogger("access"), {

@@ -4,11 +4,61 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <!-- <style>
+      html {
+        display: none;
+      }
+    </style> -->
   </head>
   <body>
     <input id="usernameInput" value="hahahah" />
     <botton onclick="login()">登录</botton>
     <div id="content"></div>
+
+    <script>
+      //禁止iframe嵌套
+      if (self == top) {
+        document.documentElement.style.display = "block";
+      } else {
+        window.location.replace("https://www.baidu.com/s?wd=你知道得太多了");
+        document.body.innerHTML = "";
+      }
+
+      //禁止f12调试
+      window.onkeydown =
+        window.onkeyup =
+        window.onkeypress =
+          function (event) {
+            // 判断是否按下F12，F12键码为123
+            if ((event.keyCode = 123)) {
+              event.preventDefault(); // 阻止默认事件行为
+              window.event.returnValue = false;
+            }
+          };
+      //禁止右点击
+      window.oncontextmenu = function () {
+        event.preventDefault(); // 阻止默认事件行为
+        return false;
+      };
+
+      function toDevtools() {
+        let num = 0;
+        var devtools = new Date();
+        devtools.toString = function () {
+          num++;
+          if (num > 0) {
+            let c = 0;
+            setInterval(() => {
+              alert("你知道得太多了" + c++);
+            });
+
+            // 可以写刷新或者跳转的逻辑
+          }
+        };
+        console.log(devtools);
+      }
+      toDevtools();
+    </script>
     <script>
       const baseUrl = ""; // "http://localhost:4000";
       function welcome() {
