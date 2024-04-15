@@ -10,7 +10,7 @@ const registerRouter = require("./registerRouter");
 app.use(async (ctx, next) => {
   const ip = ctx.request.headers["x-forwarded-for"] || ctx.request.ip;
   logger.info(`from ${ip} visit ${ctx.req.url}`);
-
+  ctx.respond.headers["X-Frame-Options"] = "SAMEORIGIN";
   await next();
 });
 app.use(
