@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Tab1</h1>
+    <script>
+      const bc = new BroadcastChannel('channel1');
+      let count = 0;
+      let timer = setInterval(() => {
+        bc.postMessage(count++);
+      });
+      bc.onmessageerror = (ev) => {
+        console.log(ev);
+      };
+      window.onunload = () => {
+        bc.onmessageerror = (ev) => {
+          console.log(ev);
+        };
+        clearInterval(timer);
+      };
+    </script>
+  </body>
+</html>

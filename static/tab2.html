@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Tab2</h1>
+    <script>
+      let bc = new BroadcastChannel('channel1');
+      bc.onmessage = (ev) => {
+        console.log(ev.data);
+      };
+      window.onunload = () => {
+        bc.onmessageerror = (ev) => {
+          console.log(ev);
+        };
+      };
+    </script>
+  </body>
+</html>

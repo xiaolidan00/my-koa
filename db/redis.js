@@ -1,6 +1,6 @@
-const Redis = require("ioredis");
+const Redis = require('ioredis');
 
-const redis = new Redis("redis://:123456@127.0.0.1:6379/8");
+const redis = new Redis('redis://:123456@127.0.0.1:6379/8');
 
 module.exports = {
   setItem: (key, value) => {
@@ -24,10 +24,10 @@ module.exports = {
           console.error(err);
           reject(err);
         } else {
-          console.log("redis result", result);
-          resolve(result); // Prints "value"
+          console.log('redis result', result);
+          resolve(result);
         }
       });
     });
-  },
+  }
 };

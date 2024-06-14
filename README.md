@@ -50,11 +50,11 @@ taskkill /f /t /pid 17444
 
 ```yaml
 location /api/{
-			proxy_pass http://localhost:4000/;
+   proxy_pass http://localhost:4000/;
             #代理ip地址
-			proxy_set_header X-Real-IP $remote_addr;
-			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-		}
+   proxy_set_header X-Real-IP $remote_addr;
+   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
 ```
 
 # websocket
@@ -62,3 +62,36 @@ location /api/{
 ```bash
 node ws.js
 ```
+
+# 静态资源服务
+
+```bash
+node static.js
+```
+
+# 后台代理转发，去除iframe嵌套限制
+
+```bash
+node uniframe.js
+```
+
+```html
+<iframe
+      sandbox="allow-popups allow-same-origin allow-scripts"
+      src="http://127.0.0.1:10101/index.html"
+    ></iframe>
+```
+
+# 服务端推送
+
+<https://www.ruanyifeng.com/blog/2017/05/server-sent_events.html>
+
+```bash
+node serverPush.js
+```
+
+# Tab之间通信
+
+<https://developer.mozilla.org/zh-CN/docs/Web/API/BroadcastChannel>
+
+# localstorage和onstorage通信
